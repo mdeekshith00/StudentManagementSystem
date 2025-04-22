@@ -3,7 +3,7 @@ package com.springBootApplication.studentManagementSystem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@EnableConfig
+
 @SpringBootApplication
 public class StudentManagementSystemApplication {
 

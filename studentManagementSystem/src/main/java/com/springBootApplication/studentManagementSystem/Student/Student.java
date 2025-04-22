@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -17,16 +18,19 @@ public class Student {
 	@GeneratedValue
 	private int id;
 	
-	@Column(unique=true)
+	@Column(unique=true, nullable = false)
+	@Size(min = 3, message= " Student Name Should be greater 3 Characters " )
 	private String name;
 	
-	@Min(value = 3, message = "rollNo should not be Greather than 3")
+	@Min(value = 3, message = "rollNo should  be Greather than 3")
 	@Column(unique = true)
-	private Integer  rollNo;
+	private int rollNo;
 	
 	@Column
-	@Past(message = " Birth Date should be in the PAst")
+	@Past(message = "Date of birth should be in the past")
 	private LocalDate dob;
+	
+	@Size(min = 3, max = 20,  message= "addres cannot be more than 20 characters")
 	@Column
 	private String address;
 	

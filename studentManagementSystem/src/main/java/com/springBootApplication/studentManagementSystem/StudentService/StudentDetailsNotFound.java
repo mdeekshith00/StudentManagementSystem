@@ -1,4 +1,4 @@
-package com.springBootApplication.studentManagementSystem.Student;
+package com.springBootApplication.studentManagementSystem.StudentService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
