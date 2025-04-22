@@ -33,41 +33,48 @@ public class StudentController {
 	}
 	@PostMapping("/addStudent")
 	public ResponseEntity<Student> addStudent(@Valid @RequestBody Student s) {
-		return new ResponseEntity<>(service.addStudent(s),HttpStatus.FOUND);
+		return new ResponseEntity<>(service.addStudent(s),HttpStatus.OK);
 	}
 	@GetMapping(path = "/getAllStudent", headers = "X-API-VERSION=1")
 	public ResponseEntity<List<Student>> getAllStudent(){
-	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.FOUND);
+	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.OK);
 	}
 	@GetMapping(path = "/getAllStudent", params = "version=1")
 	public ResponseEntity<List<Student>> getAllStudentversioning(){
-	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.FOUND);
+	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.OK);
 	}
 	
 	
 	@DeleteMapping("/deleteStudent/{id}")
-	public ResponseEntity deleteStudentById(@PathVariable int id) {
+	public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
 		service.deleteStudentById(id);
-		return new  ResponseEntity<>(HttpStatus.FOUND);
+		return new  ResponseEntity<>("DELETED STUDENT DETAILS ON THIS ID :" + id  , HttpStatus.OK);
 	}
 	@PutMapping("/updateStudent/{id}")
 	public ResponseEntity<String> updateStudent(@Valid @RequestBody Student s ,@PathVariable  int id) {
 		service.updateStudent(s, id);
-		return new ResponseEntity<>("Student details updated", HttpStatus.FOUND);
+		return new ResponseEntity<>("Student details updated", HttpStatus.OK);
 	}
 	@GetMapping("/getStudentByName/{name}")
-	public ResponseEntity<List<Student>> getStudentById(@PathVariable String name) {
-		return new ResponseEntity<>(service.findStudentByName(name),HttpStatus.FOUND);
+	public ResponseEntity<Student> getStudentById(@PathVariable String name) {
+		return new ResponseEntity<>(service.findStudentByName(name),HttpStatus.OK);
 	}
 	@GetMapping("/getStudentByRollNo/{rollNo}")
-	public ResponseEntity<List<Student>> getStudentById(@PathVariable int rollNo) {
-		return new ResponseEntity<>(service.findStudentByRollNo(rollNo),HttpStatus.OK);
+	public ResponseEntity<Student> getStudentByRollNo(@PathVariable int rollNo) {
+		Student s = service.findStudentByRollNo(rollNo);
+		if(s != null) {
+		return new ResponseEntity<>(s,HttpStatus.OK);
+	}  
+		return new ResponseEntity<>(s,HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/getAllStudentById/{id}")
-	public ResponseEntity<Student> getById(@PathVariable int id){
+	public ResponseEntity<Student> getStudentById(@PathVariable int id){
 	    Student student1= 	service.getStudentById(id);
-	    return new ResponseEntity<>(student1,HttpStatus.FOUND);
+	    if(student1 != null) {
+	    return new ResponseEntity<>(student1,HttpStatus.OK);
+	    } 
+	    return new ResponseEntity<>(student1, HttpStatus.NOT_FOUND);
 	}
 
 }

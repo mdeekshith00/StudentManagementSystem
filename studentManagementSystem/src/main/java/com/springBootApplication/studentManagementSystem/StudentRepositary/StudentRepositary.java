@@ -9,8 +9,8 @@ import com.springBootApplication.studentManagementSystem.Student.Student;
 
 @Repository
 public interface StudentRepositary extends JpaRepository<Student,Integer>{
-	 List<Student> findStudentByName(String name);
-	 List<Student> findStudentByRollNo(int rollNo);
+	Student findStudentByName(String name);
+	Student findStudentByRollNo(int rollNo);
 
 
 

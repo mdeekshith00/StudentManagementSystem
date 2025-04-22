@@ -1,10 +1,10 @@
 package com.springBootApplication.studentManagementSystem.StudentService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springBootApplication.studentManagementSystem.Student.Student;
@@ -37,11 +37,11 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student getStudentById(int id) {
 		// TODO Auto-generated method stub
-		Student student =  repositary.findById(id).get();
-		if(student == null) {
+		Optional<Student> student =  repositary.findById(id);
+		if(student.isEmpty()) {
 			throw new StudentDetailsNotFound("student id not found here ");
 		}
-		return student;
+		return student.get();
 	}
 	
 
@@ -67,12 +67,17 @@ public class StudentServiceImpl implements StudentService{
 		return "Updated Studenty deatils ";
 	}
 
-	public List<Student> findStudentByName(String name) {
+	public Student findStudentByName(String name) {
 		// TODO Auto-generated method stub
-		return repositary.findStudentByName(name); 
+		Student s = repositary.findStudentByName(name);
+		if(s == null) {
+			throw new StudentNameNotFound("Student Name Not Found Here");
+		}
+		return s;
+	
 	}
 
-	public List<Student> findStudentByRollNo(int rollNo) {
+	public Student findStudentByRollNo(int rollNo) {
 		// TODO Auto-generated method stub
 		return repositary.findStudentByRollNo(rollNo);
 	}
