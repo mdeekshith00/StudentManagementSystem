@@ -1,6 +1,7 @@
 package com.springBootApplication.studentManagementSystem.StudentService;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,7 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return student;
 	}
+	
 
 	@Override
 	public void deleteStudentById(int id) {
@@ -62,8 +64,17 @@ public class StudentServiceImpl implements StudentService{
 		student.setAddress(s.getAddress());
 		
 		repositary.save(student);
-		
 		return "Updated Studenty deatils ";
+	}
+
+	public List<Student> findStudentByName(String name) {
+		// TODO Auto-generated method stub
+		return repositary.findStudentByName(name); 
+	}
+
+	public List<Student> findStudentByRollNo(int rollNo) {
+		// TODO Auto-generated method stub
+		return repositary.findStudentByRollNo(rollNo);
 	}
 
 }

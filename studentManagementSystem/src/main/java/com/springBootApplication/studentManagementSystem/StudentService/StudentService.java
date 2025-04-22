@@ -11,7 +11,7 @@ public interface StudentService {
 	Student getStudentById(int id);
 	void deleteStudentById(int id);
 	String updateStudent(Student s , int id);
-	
-	
+	 List<Student> findStudentByName(String name);
+	 List<Student> findStudentByRollNo(int rollNo);
 
 }
