@@ -32,25 +32,49 @@ public class StudentController {
 		this.service=service;
 	}
 	@PostMapping("/addStudent")
-	public Student addStudent(@Valid @RequestBody Student s) {
-		return service.addStudent(s);
+	public ResponseEntity<Student> addStudent(@Valid @RequestBody Student s) {
+		return new ResponseEntity<>(service.addStudent(s),HttpStatus.OK);
 	}
-	@GetMapping("/getAllStudent")
-	public List<Student> getAllStudent(){
-	    return 	service.getAllStudent();
+	@GetMapping(path = "/getAllStudent", headers = "X-API-VERSION=1")
+	public ResponseEntity<List<Student>> getAllStudent(){
+	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.OK);
 	}
-	@GetMapping("/getStudentById/{id}")
-	public Student getStudentById(@PathVariable int id) {
-		return service.getStudentById(id);
+	@GetMapping(path = "/getAllStudent", params = "version=1")
+	public ResponseEntity<List<Student>> getAllStudentversioning(){
+	    return 	new ResponseEntity<>(service.getAllStudent(),HttpStatus.OK);
 	}
+	
+	
 	@DeleteMapping("/deleteStudent/{id}")
-	public void deleteStudentById(@PathVariable int id) {
+	public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
 		service.deleteStudentById(id);
+		return new  ResponseEntity<>("DELETED STUDENT DETAILS ON THIS ID :" + id  , HttpStatus.OK);
 	}
 	@PutMapping("/updateStudent/{id}")
-	public String updateStudent(@Valid @RequestBody Student s ,@PathVariable  int id) {
+	public ResponseEntity<String> updateStudent(@Valid @RequestBody Student s ,@PathVariable  int id) {
 		service.updateStudent(s, id);
-		return "student details updated";
+		return new ResponseEntity<>("Student details updated", HttpStatus.OK);
+	}
+	@GetMapping("/getStudentByName/{name}")
+	public ResponseEntity<Student> getStudentById(@PathVariable String name) {
+		return new ResponseEntity<>(service.findStudentByName(name),HttpStatus.OK);
+	}
+	@GetMapping("/getStudentByRollNo/{rollNo}")
+	public ResponseEntity<Student> getStudentByRollNo(@PathVariable int rollNo) {
+		Student s = service.findStudentByRollNo(rollNo);
+		if(s != null) {
+		return new ResponseEntity<>(s,HttpStatus.OK);
+	}  
+		return new ResponseEntity<>(s,HttpStatus.NOT_FOUND);
+	}
+
+	@GetMapping("/getAllStudentById/{id}")
+	public ResponseEntity<Student> getStudentById(@PathVariable int id){
+	    Student student1= 	service.getStudentById(id);
+	    if(student1 != null) {
+	    return new ResponseEntity<>(student1,HttpStatus.OK);
+	    } 
+	    return new ResponseEntity<>(student1, HttpStatus.NOT_FOUND);
 	}
 
 }
