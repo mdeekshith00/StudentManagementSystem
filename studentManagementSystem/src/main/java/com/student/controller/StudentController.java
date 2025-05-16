@@ -1,10 +1,8 @@
 package com.student.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +20,7 @@ import com.student.service.StudentServiceImpl;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Students")
+@RequestMapping("/students")
 public class StudentController {
 	@Autowired
 	private StudentServiceImpl service;
@@ -45,26 +43,26 @@ public class StudentController {
 	}
 	
 	
-	@DeleteMapping("/deleteStudent/{id}")
-	public ResponseEntity deleteStudentById(@PathVariable int id) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
 		service.deleteStudentById(id);
-		return new  ResponseEntity<>(HttpStatus.FOUND);
+		return new  ResponseEntity<>("deleted Student On this Id: " + id , HttpStatus.FOUND);
 	}
-	@PutMapping("/updateStudent/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateStudent(@Valid @RequestBody Student s ,@PathVariable  int id) {
 		service.updateStudent(s, id);
 		return new ResponseEntity<>("Student details updated", HttpStatus.FOUND);
 	}
-	@GetMapping("/getStudentByName/{name}")
+	@GetMapping("/name/{name}")
 	public ResponseEntity<List<Student>> getStudentById(@PathVariable String name) {
 		return new ResponseEntity<>(service.findStudentByName(name),HttpStatus.FOUND);
 	}
-	@GetMapping("/getStudentByRollNo/{rollNo}")
+	@GetMapping("/rollo/{rollNo}")
 	public ResponseEntity<List<Student>> getStudentById(@PathVariable int rollNo) {
 		return new ResponseEntity<>(service.findStudentByRollNo(rollNo),HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllStudentById/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Student> getById(@PathVariable int id){
 	    Student student1= 	service.getStudentById(id);
 	    return new ResponseEntity<>(student1,HttpStatus.FOUND);
