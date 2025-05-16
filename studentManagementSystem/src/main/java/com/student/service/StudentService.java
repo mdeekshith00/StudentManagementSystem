@@ -1,7 +1,8 @@
-package com.springBootApplication.studentManagementSystem.StudentService;
+package com.student.service;
 
 import java.util.List;
-import com.springBootApplication.studentManagementSystem.Student.Student;
+
+import com.student.model.Student;
 
 
 public interface StudentService {

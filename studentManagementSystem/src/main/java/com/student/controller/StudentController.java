@@ -1,4 +1,4 @@
-package com.springBootApplication.studentManagementSystem.StudentController;
+package com.student.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springBootApplication.studentManagementSystem.Student.Student;
-import com.springBootApplication.studentManagementSystem.StudentService.StudentServiceImpl;
+import com.student.model.Student;
+import com.student.service.StudentServiceImpl;
 
 import jakarta.validation.Valid;
 

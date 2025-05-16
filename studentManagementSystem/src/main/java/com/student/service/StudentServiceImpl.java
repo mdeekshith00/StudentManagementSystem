@@ -1,4 +1,4 @@
-package com.springBootApplication.studentManagementSystem.StudentService;
+package com.student.service;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.springBootApplication.studentManagementSystem.Student.Student;
-import com.springBootApplication.studentManagementSystem.StudentRepositary.StudentRepositary;
+import com.student.model.Student;
+import com.student.repositary.StudentRepositary;
 
 
 @Service
@@ -16,10 +16,7 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	private StudentRepositary repositary;
 	
-	public StudentServiceImpl(StudentRepositary repositary) {
-		super();
-		this.repositary = repositary;
-	}
+	
 
 	@Override
 	public Student addStudent(Student s) {

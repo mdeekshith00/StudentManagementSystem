@@ -1,4 +1,4 @@
-package com.springBootApplication.studentManagementSystem.Student;
+package com.student.model;
 
 import java.time.LocalDate;
 
